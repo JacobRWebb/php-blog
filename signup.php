@@ -2,7 +2,7 @@
   include_once("session.php");
 
   if ($auth == true) {
-    header("Location: php-blog/index.php");
+    header("Location: index.php");
   }
 
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -14,11 +14,24 @@
       } else if (strlen($password) <= 3) {
         $error = "password must be more than 3 characters.";
       } else {
-
-      }
-
-      if (!isset($error)) {
-        //  Precede with signup;
+        $conn = mysqli_connect($server, $dbUsername, $dbPassword, $dbDatabase);
+        $sql = "SELECT * FROM user WHERE username = \"".$username."\"";
+        if ($result=$conn->query($sql)) {
+          if (mysqli_num_rows($result) > 0) {
+            $error = "Username already exist.";
+          } else {
+            $stmt = $conn->prepare("INSERT INTO user (username, password) VALUES (?, ?)");
+            $stmt->bind_param("ss", $username, $password);
+            $stmt->execute();
+            if ($conn->affected_rows > 0) {
+              $_SESSION["auth"] = true;
+              $_SESSION["username"] = $username;
+              header("Location: index.php");
+            } else {
+              $error = "Something went wrong";
+            }
+          }
+        }
       }
     } else {
       $error = "Username or password is missing.";
@@ -42,9 +55,9 @@
       <div class="signup">
         <form method="POST">
           <h1 class="header">Sign up</h1>
-          <input placeholder="Username" autocomplete="username" name="username"  class="auth-input" />
+          <input type="text" placeholder="Username" autocomplete="username" name="username"  class="auth-input" />
           <br />
-          <input placeholder="Password" autocomplete="password" name="password" class="auth-input" />
+          <input type="password" placeholder="Password" autocomplete="new-password" name="password" class="auth-input" />
           <br />
           <?php
             if (isset($error)) {
