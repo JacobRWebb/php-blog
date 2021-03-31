@@ -1,5 +1,5 @@
-<?php 
-  
+<?php
+  include_once("session.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,6 +10,20 @@
   <title>Blog</title>
 </head>
 <body>
-  
+  <?php
+    include_once("navbar.php")
+  ?>
+  <div class="content">
+    <h1 style={{margin: 0}}>Index</h1>
+    <?php
+      if ($auth) {
+        echo "<h2>You are logged in as $username</h2>";
+      } else {
+        echo "<p>You are not logged in </p>";
+        echo "<br />";
+        echo "<button onClick=\"document.location.href=`login.php`\">Login</button>";
+      }
+    ?>
+  </div>
 </body>
 </html>

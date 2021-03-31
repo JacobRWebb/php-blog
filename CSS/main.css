@@ -1,0 +1,16 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+.content {
+  min-width: 100vw;
+  min-height: 100vh;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background-color: rgb(115, 163, 153);
+  margin-right: 50px;
+}
