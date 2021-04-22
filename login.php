@@ -1,33 +1,24 @@
 <?php
-  include_once("session.php");
+  include_once("module/session.php");
+  include_once("module/UserClass.php");
 
-  if ($auth == true) {
+  $userClass = new User();
+
+  if ($userID) {
     header("Location: index.php");
+    exit();
   }
 
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST["username"]) && isset($_POST["password"])) {
-      $username = $_POST["username"];
-      $password = $_POST["password"];
-      if (strlen($username) <= 3) {
-        $error = "username must be more than 3 characters.";
-      } else if (strlen($password) <= 3) {
-        $error = "password must be more than 3 characters.";
-      } else {
-        $conn = mysqli_connect($server, $dbUsername, $dbPassword, $dbDatabase);
-        $sql = "SELECT * FROM user WHERE username = \"".$username."\" AND password = \"".$password."\"";
-        if ($result=$conn->query($sql)) {
-          if (mysqli_num_rows($result) < 1) {
-            $error = "Username or password is incorrect.";
-          } else {
-            $_SESSION["auth"] = true;
-            $_SESSION["username"] = $username;
-            header("Location: index.php");
-          }
-        }
+    unset($_SESSION["error"]);
+
+    if (isset($_POST["METHOD"])) {
+      $method = $_POST["METHOD"];
+      $errorType = $method;
+
+      if ($method == "loginForm") {
+        $userClass->Login($_POST);
       }
-    } else {
-      $error = "Username or password is missing.";
     }
   }
 ?>
@@ -39,28 +30,29 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
-  <link rel="stylesheet" href="CSS/auth.css" type="text/css">
+  <link rel="stylesheet" href="main.css" type="text/css">
 </head>
 <body>
-<?php include_once("navbar.php"); ?>
-  <div class="content">
-    <div class="wrapper">
-      <div class="signup">
-        <form method="POST">
-          <h1 class="header">Login</h1>
-          <input type="text" placeholder="Username" autocomplete="username" name="username"  class="auth-input" />
-          <br />
-          <input type="password" placeholder="Password" autocomplete="password" name="password" class="auth-input" />
-          <br />
-          <?php
-            if (isset($error)) {
-              echo "<p class='error'>$error</p>";
-              echo "<br />";
+  <?php include_once("module/navbar.php"); ?>
+  <div class="layout">
+    <div class="container authContainer">
+      <form method="POST">
+        <p class="header">Login</p>
+        <input required minlength="1" maxlength="100" autocomplete="username" name="username" placeholder="Username" type="text" class="input" />
+        <input required minlength="1" autocomplete="password" name="password" placeholder="Password" type="password" class="input" />
+        <input type="hidden" name="METHOD" value="loginForm" />
+        <?php
+          if (isset($errorType) && isset($_SESSION["error"])) {
+            $error = $_SESSION["error"];
+            if ($errorType == "loginForm") {
+              echo("<p class='error'>$error</p>");
             }
-          ?>
-          <button type="submit">Login</button>
-        </form>
-      </div>
+          }
+        ?>
+        <div class="end">
+          <button class="actionButton" type="submit">Login!</button>
+        </div>
+      </form>
     </div>
   </div>
 </body>

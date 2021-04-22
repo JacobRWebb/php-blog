@@ -1,0 +1,226 @@
+html,
+body {
+  padding: 0%;
+  margin: 0%;
+  overflow-x: hidden;
+  background-color: rgb(246, 249, 252);
+}
+
+p {
+  margin: unset;
+  padding: unset;
+}
+
+.navbar {
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(236, 239, 241);
+  padding: 10px 10% 10px 10%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+  }
+
+  .logo {
+    text-align: center;
+    margin-bottom: 11px;
+    min-width: 100%;
+  }
+}
+
+.navMenu {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.navMenu * {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.navMenu *:first-child {
+  margin-left: unset;
+}
+
+.navMenu *:last-child {
+  margin-right: unset;
+}
+
+.navButton {
+  border: 1px solid rgb(236, 239, 241);
+  border-radius: 8px;
+  background-color: rgb(246, 249, 252);
+  padding: 12px;
+  color: black;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.navButton:hover {
+  background-color: rgb(204, 198, 198);
+  box-shadow: 0px 0px 8px 1px rgb(224, 224, 224);
+}
+
+.logo {
+  color: rgb(102, 102, 102);
+  font-weight: bold;
+  font-size: 2.3rem;
+  width: 50%;
+  cursor: pointer;
+}
+
+.username {
+  color: rgb(102, 102, 102);
+}
+
+.layout {
+  padding-top: 1%;
+  padding-left: 8%;
+  padding-right: 8%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 80vh;
+}
+
+.container {
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(236, 239, 241);
+  box-shadow: 0px 5px 10px 3px rgb(236, 239, 241);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  margin: 22px 0px 22px 0px;
+  padding: 22px;
+  overflow: hidden;
+}
+
+.header {
+  font-size: 2rem;
+  text-align: center;
+}
+
+fieldset {
+  border: none;
+}
+
+legend {
+  text-align: center;
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  background-color: rgb(246, 249, 252);
+  border: 1px solid rgb(236, 239, 241);
+  border-radius: 10px;
+  padding: 9px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 60px;
+  max-height: 250px;
+}
+
+.actionButton {
+  background-color: rgb(65, 100, 190);
+  border: 1px solid rgb(236, 239, 241);
+  border-radius: 8px;
+  padding: 9px;
+  color: white;
+  cursor: pointer;
+  user-select: none;
+}
+
+.actionButton:hover {
+  border: 1px solid rgb(65, 100, 190);
+  background-color: rgb(77, 116, 216);
+  box-shadow: 0px 0px 8px 1px rgb(65, 100, 190);
+}
+
+.end {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+  align-items: center;
+}
+
+.end * {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.end *:first-child {
+  margin-left: 0%;
+}
+
+.end *:last-child {
+  margin-right: 0%;
+}
+
+.error {
+  color: rgb(228, 62, 62);
+}
+
+.inform {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.post {
+  display: flex;
+  flex-direction: column;
+}
+
+.post .title {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 22px;
+  cursor: pointer;
+}
+
+.title {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 22px;
+  cursor: pointer;
+}
+
+.title:hover {
+  text-shadow: 2px 1px rgba(199, 196, 196, 0.616);
+}
+
+.post .content {
+  border-bottom: 1px solid rgb(236, 239, 241);
+  padding-bottom: 22px;
+  margin-bottom: 22px;
+  font-size: 1.1rem;
+  overflow: hidden;
+  overflow-wrap: break-word;
+}
+
+.replyContent {
+  background-color: rgb(246, 249, 252);
+  overflow-wrap: break-word;
+}
+
+.authContainer {
+  margin: 10% 25% 0 25%;
+  min-width: 300px;
+}
